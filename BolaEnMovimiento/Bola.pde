@@ -11,8 +11,8 @@ class Bola {
     this.x = x;
     this.y = y;
     this.radio = radio;
-    this.velocidadX = 2;
-    this.velocidadY = 2;
+    this.velocidadX = random(-3, 3);
+    this.velocidadY = random(-3, 3);
   }
 
   // Método para dibujar la bola
@@ -34,6 +34,18 @@ class Bola {
     if (y - radio < 0 || y + radio > height) {
       velocidadY *= -1;
     }
+  }
+  
+  //Detecta colisión con la otra bola
+  boolean colisionaCon(Bola otra) {
+    float distancia = dist(this.x, this.y, otra.getX(), otra.getY());
+    return distancia <= this.radio + otra.getRadio();
+  }
+  
+  //Cambia dirección de las bolas
+  void rebotar() {
+    velocidadX *= -1;
+    velocidadY *= -1;
   }
 
   // Getters
